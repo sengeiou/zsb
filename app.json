@@ -1,8 +1,8 @@
 {
   "pages":[
     "pages/map/map",
+    "pages/weather/weather",
     "pages/mapzb/mapzb",
-    
     "pages/nearby/nearby",
     "pages/metro/metro",
     "pages/transit/transit",
@@ -18,20 +18,20 @@
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "tabBar": {
-    "selectedColor": "#F5B223",
+    "selectedColor": "#1296db",
     "color": "#9A9A9A",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "text": "附近便捷",
-        "iconPath": "images/fb2.png",
-        "selectedIconPath": "images/fb1.png"
+        "pagePath": "pages/map/map",
+        "text": "导航",
+        "iconPath": "images/fb1.png",
+        "selectedIconPath": "images/fb2.png"
       },
       {
-        "pagePath": "pages/metro/metro",
-        "text": "地铁查询",
-        "iconPath": "images/dtdt1.png",
-        "selectedIconPath": "images/dtdt2.png"
+        "pagePath": "pages/weather/weather",
+        "text": "天气",
+        "iconPath": "images/tq.png",
+        "selectedIconPath": "images/tq1.png"
       }
     ]
   },

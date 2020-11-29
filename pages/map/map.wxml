@@ -1,7 +1,7 @@
 <!-- bindcontroltap="bindControlTap" -->
+<!-- subkey="6WMBZ-LQULS-5DBOS-6DRZO-XXT22-XLFBR" -->
 
 <map id="map" 
-subkey="6WMBZ-LQULS-5DBOS-6DRZO-XXT22-XLFBR"
 bindregionchange="bindRegionChange" 
 bindcallouttap="callouttap"
 longitude="{{longitude}}"

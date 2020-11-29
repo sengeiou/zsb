@@ -1,4 +1,8 @@
-//app.js
+const util = require('./utils/util')
+const api = require('./api')
+const loading = require('./utils/loading')
+const config = require('./utils/config')
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -6,7 +10,7 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    
+
     // 登录
     wx.login({
       success: res => {
@@ -35,6 +39,10 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    util,
+    api,
+    config,
+    loading
   }
 })
