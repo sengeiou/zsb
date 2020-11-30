@@ -35,7 +35,16 @@ Page({
 
     // 加载提示
     ...loading,
-
+    //分享还没发开完成
+    wx_share() {
+        wx.showShareMenu();
+    },
+    onLoad(){
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+          })
+    },
     onShow() {
         this.init()
     },
@@ -82,7 +91,10 @@ Page({
         }
         await api.getLocation()
             .then((res) => {
-                let { longitude, latitude } = res
+                let {
+                    longitude,
+                    latitude
+                } = res
 
                 this.setData({
                     location: `${longitude},${latitude}`
@@ -114,7 +126,7 @@ Page({
         await this.getNowWeather()
 
         // // 获取逐三小时天气
-       // await this.getHourlyWeather()
+        // await this.getHourlyWeather()
 
         // 获取逐日天气
         await this.getDailyWeather()
@@ -130,34 +142,34 @@ Page({
     getNowWeather() {
         return new Promise((resolve, reject) => {
             api.getNowWeather({
-                location: this.data.location
-            })
-            .then((res) => {
-                let data = res.HeWeather6[0]
-                console.log(data)
-                this.setData({
-                    nowWeather: {
-                        parentCity: data.basic.parent_city,
-                        location: data.basic.location,
-                        tmp: data.now.tmp,
-                        condTxt: data.now.cond_txt,
-                        windDir: data.now.wind_dir,
-                        windSc: data.now.wind_sc,
-                        windSpd: data.now.wind_spd,
-                        pres: data.now.pres,
-                        hum: data.now.hum,
-                        pcpn: data.now.pcpn,
-                        condIconUrl: `${config.COND_ICON_BASE_URL}/${data.now.cond_code}.png`,
-                        loc: data.update.loc.slice(5).replace(/-/, '/')
-                    }
+                    location: this.data.location
                 })
-                this.initBgImg(data.now.cond_code)
-                resolve()
-            })
-            .catch((err) => {
-                console.error(err)
-                reject(err)
-            })
+                .then((res) => {
+                    let data = res.HeWeather6[0]
+                    console.log(data)
+                    this.setData({
+                        nowWeather: {
+                            parentCity: data.basic.parent_city,
+                            location: data.basic.location,
+                            tmp: data.now.tmp,
+                            condTxt: data.now.cond_txt,
+                            windDir: data.now.wind_dir,
+                            windSc: data.now.wind_sc,
+                            windSpd: data.now.wind_spd,
+                            pres: data.now.pres,
+                            hum: data.now.hum,
+                            pcpn: data.now.pcpn,
+                            condIconUrl: `${config.COND_ICON_BASE_URL}/${data.now.cond_code}.png`,
+                            loc: data.update.loc.slice(5).replace(/-/, '/')
+                        }
+                    })
+                    this.initBgImg(data.now.cond_code)
+                    resolve()
+                })
+                .catch((err) => {
+                    console.error(err)
+                    reject(err)
+                })
         })
     },
 
@@ -183,14 +195,14 @@ Page({
     },
 
     // 获取逐三小时天气
-   
+
 
     // 获取逐日天气
     getDailyWeather() {
         return new Promise((resolve, reject) => {
             api.getDailyWeather({
-                location: this.data.location
-            })
+                    location: this.data.location
+                })
                 .then((res) => {
                     let data = res.HeWeather6[0].daily_forecast
                     let dailyWeather = data.reduce((pre, cur) => {
@@ -229,8 +241,8 @@ Page({
     getLifestyle() {
         return new Promise((resolve, reject) => {
             api.getLifestyle({
-                location: this.data.location
-            })
+                    location: this.data.location
+                })
                 .then((res) => {
                     let data = res.HeWeather6[0].lifestyle
                     const lifestyleImgList = config.lifestyleImgList

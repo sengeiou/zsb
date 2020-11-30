@@ -9,7 +9,6 @@
         <text class="userinfo-nickname">{{greetings}}，</text>
         <open-data type="userNickName" />
     </view>
-
     <!-- 实时天气信息 -->
     <view class="now">
         <view class="now-position">
@@ -85,7 +84,9 @@
 
     <!-- copyright -->
     <view class="copyright">
-        <text>developed by HALOH</text>
-        <text>, api by heweather</text>
+        <text>Developed by：hs</text>
+        <text>, Debugging by：zan</text>
     </view>
 </view>
+<!-- <button class="share-btn" open-type="share" bindtap="wx_share">立即分享</button> -->
+

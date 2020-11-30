@@ -5,8 +5,8 @@ const chooseLocation = requirePlugin('chooseLocation');
 
 Page({
   data: {
-    latitude: 29.570043563842773,
-    longitude: 106.5005874633789,
+    // latitude: 29.570043563842773,
+    // longitude: 106.5005874633789,
     mapw: '100%',
     maph: '0',
     scale: '16',
@@ -43,6 +43,13 @@ Page({
   },
   mapCtx: null,
   onLoad: function () {
+
+    //支持页面转发
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+
     // 实例化API核心类
     qqmapsdk = new QQMapWX({
       key: '6WMBZ-LQULS-5DBOS-6DRZO-XXT22-XLFBR' //你腾讯位置服务的key

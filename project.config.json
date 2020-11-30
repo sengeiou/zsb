@@ -38,7 +38,6 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.10.4",
-  "appid": "wx1bf859f9f6914523",
   "projectname": "zsb",
   "debugOptions": {
     "hidedInDevtools": []
@@ -47,6 +46,7 @@
   "isGameTourist": false,
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
+  "appid": "wx1bf859f9f6914523",
   "condition": {
     "plugin": {
       "list": []
