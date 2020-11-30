@@ -32,7 +32,8 @@ bindtap="bindtap"
 <cover-view class="xmwzB flex tfAlignC flexSb">
 		<cover-view class="xmwzBLi {{index==xmwzB_index?'on':''}}" data-index='{{index}}' catchtap="xmwzB_click" wx:for='{{tabs}}' wx:key='index'>
       <cover-image class="img" src="{{index!=xmwzB_index?item.ico:item.ico_active}}"></cover-image>
-      {{item.name}}
+      <!-- 安卓手机图片和文字重叠了 -->
+      <cover-view>{{item.name}}</cover-view> 
     </cover-view>
   </cover-view>
 
