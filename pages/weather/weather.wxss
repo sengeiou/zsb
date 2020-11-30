@@ -60,8 +60,8 @@
 }
 
 .now-position image {
-    width: 28rpx;
-    height: 28rpx;
+    width: 40rpx;
+    height: 40rpx;
 }
 
 .now-tmp {

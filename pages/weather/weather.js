@@ -71,9 +71,9 @@ Page({
 
     // 跳到搜索页
     toSearchPage() {
-        // wx.navigateTo({
-        //     url: '/pages/searchGeo/searchGeo'
-        // })
+        wx.navigateTo({
+            url: '/pages/searchGeo/searchGeo'
+        })
     },
 
     // 获取地理位置信息
@@ -125,8 +125,8 @@ Page({
         // 获取实时天气
         await this.getNowWeather()
 
-        // // 获取逐三小时天气
-        // await this.getHourlyWeather()
+        // 获取逐三小时天气
+        await this.getHourlyWeather()
 
         // 获取逐日天气
         await this.getDailyWeather()
@@ -195,6 +195,47 @@ Page({
     },
 
     // 获取逐三小时天气
+    getHourlyWeather() {
+        return new Promise((resolve, reject) => {
+            console.log(this.data.location)
+            api.getHourlyWeather({
+                location: this.data.location
+            })
+            .then((res) => {
+                let data = res.HeWeather6[0].hourly
+                console.log(res)
+                let formatData = data.reduce((pre, cur) => {
+                    pre.push({
+                        date: cur.time.split(' ')[1],
+                        condIconUrl: `${config.COND_ICON_BASE_URL}/${cur.cond_code}.png`, // 天气图标
+                        condTxt: cur.cond_txt, // 天气状况描述
+                        tmp: cur.tmp, // 气温
+                        windDir: cur.wind_dir, // 风向
+                        windSc: cur.wind_sc, // 风力
+                        windSpd: cur.wind_spd, // 风速
+                        pres: cur.pres // 大气压
+                    })
+                    return pre
+                }, [])
+
+                let gap = 4
+                let trip = Math.ceil(formatData.length / gap)
+                let hourlyWeather = []
+                for (let i = 0; i < trip; i++) {
+                    hourlyWeather.push(formatData.slice(i * gap, (i + 1) * gap))
+                }
+
+                this.setData({
+                    hourlyWeather
+                })
+                resolve()
+            })
+            .catch((err) => {
+                console.error(err)
+                reject(err)
+            })
+        })
+    },
 
 
     // 获取逐日天气

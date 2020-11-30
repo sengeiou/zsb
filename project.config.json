@@ -60,14 +60,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/index/index",
-          "pathName": "pages/index/index",
+          "name": "pages/weather/weather",
+          "pathName": "pages/weather/weather",
           "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/transit/transit",
-          "pathName": "pages/transit/transit",
           "scene": null
         }
       ]

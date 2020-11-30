@@ -10,13 +10,14 @@
         <open-data type="userNickName" />
     </view>
     <!-- 实时天气信息 -->
-    <view class="now">
+    <view class="now" catchtap="toSearchPage">
         <view class="now-position">
-            <text catchtap="toSearchPage">{{geoDes}}</text>
-            <!-- <image catchtap="toSearchPage" src="https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/icon/location.png" /> -->
+            <!-- catchtap="toSearchPage" -->
+            <text >{{geoDes}}</text>
+            <image src="https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/icon/location.png" />
         </view>
         <view class="now-tmp">
-            <text class="now-tmp--num">{{nowWeather.tmp}}</text>
+            <text class="now-tmp--num" >{{nowWeather.tmp}}</text>
             <text>℃</text>
         </view>
         <view class="now-cond">
@@ -36,6 +37,30 @@
         <view class="now-time">
             <text>更新于 {{nowWeather.loc}}</text>
         </view>
+    </view>
+
+
+<!-- 逐三小时天气 -->
+<view class="hourly-container">
+        <view class="hourly-title">逐三小时预报</view>
+        <swiper class="hourly" indicator-active-color="#ffffff" indicator-dots="{{true}}">
+            <block wx:for="{{hourlyWeather}}" wx:for-index="times" wx:for-item="trip" wx:key="{{times}}">
+                <swiper-item class="hourly-swiper-item">
+                    <block wx:for="{{trip}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
+                        <view class="hourly-swiper-column">
+                            <view>{{item.date}}</view>
+                            <view>{{item.condTxt}}</view>
+                            <view>
+                                <image class="forecast-icon" src="{{item.condIconUrl}}" />
+                            </view>
+                            <view>{{item.tmp}}℃</view>
+                            <view>{{item.windDir}}</view>
+                            <view>风速{{item.windSc}}级</view>
+                        </view>
+                    </block>
+                </swiper-item>
+            </block>
+        </swiper>
     </view>
 
 

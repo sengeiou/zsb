@@ -24,17 +24,18 @@ module.exports = {
     lifestyleUrl: `${HEWEATHER_API}/lifestyle`, 
 
     //热门城市列表接口地址
-    hotCityList: 'https://search.heweather.net/top',
-
+    // hotCityList: 'https://search.heweather.net/top',
+    hotCityList: 'https://geoapi.qweather.com/v2/city/top?',
     //城市搜索接口地址
-    searchCity: 'https://search.heweather.net/find',
+    //searchCity: 'https://search.heweather.net/find',
+    searchCity: 'https://geoapi.qweather.com/v2/city/lookup?',
 
     // 天气图标基地址
     COND_ICON_BASE_URL: 'https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/cond-icon',
 
     // 背景图片基地址
-     BG_IMG_BASE_URL: 'https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/bg', //普通背景
-    //BG_IMG_BASE_URL: 'https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/stylebg',//卡通背景
+     //BG_IMG_BASE_URL: 'https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/bg', //普通背景
+    BG_IMG_BASE_URL: 'https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/stylebg',//卡通背景
 
     // 背景图片列表
     bgImgList: [
