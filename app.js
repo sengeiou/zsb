@@ -5,11 +5,16 @@ const config = require('./utils/config')
 
 App({
   onLaunch: function () {
+     //云开发初始化
+     wx.cloud.init({
+      env:'cxfbkj-4grnp2zf7916f6e3',//云函数id
+    })
+
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+   
 
     // 登录
     wx.login({

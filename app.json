@@ -33,6 +33,12 @@
         "text": "天气",
         "iconPath": "images/tq.png",
         "selectedIconPath": "images/tq1.png"
+      },
+      {
+        "pagePath": "pages/mapzb/mapzb",
+        "text": "授权",
+        "iconPath": "images/tq.png",
+        "selectedIconPath": "images/tq1.png"
       }
     ]
   },

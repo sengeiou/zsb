@@ -1,5 +1,6 @@
 {
   "description": "项目配置文件",
+  "cloudfunctionRoot": "cloud/",
   "packOptions": {
     "ignore": []
   },
@@ -39,6 +40,7 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "appid": "wx1bf859f9f6914523",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "plugin": {
       "list": []
@@ -52,8 +54,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/weather/weather",
-          "pathName": "pages/weather/weather",
+          "name": "pages/mapzb/mapzb",
+          "pathName": "pages/mapzb/mapzb",
           "query": "",
           "scene": null
         }
