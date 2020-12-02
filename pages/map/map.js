@@ -14,35 +14,22 @@ Page({
     // 当前选中第几个
     xmwzB_index: 0,
     // tab列表
-    tabs: [{
-        ico: '../../images/gj1.png',
-        ico_active: '../../images/gj2.png',
-        name: '公交站'
-      },
-      {
-        ico: '../../images/dt11.png',
-        ico_active: '../../images/dt22.png',
-        name: '地铁站'
-      },
-      {
-        ico: '../../images/jy1.png',
-        ico_active: '../../images/jy2.png',
-        name: '加油站'
-      },
-      {
-        ico: '../../images/tc1.png',
-        ico_active: '../../images/tc2.png',
-        name: '停车场'
-      },
-      {
-        ico: '../../images/cs1.png',
-        ico_active: '../../images/cs2.png',
-        name: '公共厕所'
-      },
-    ]
+    tabs: []
   },
   mapCtx: null,
   onLoad: function () {
+    var _this = this
+    //调用函数来渲染tabs
+    wx.cloud.callFunction({
+      name: "tabs",
+    }).then(res=>{
+      this.setData({
+        tabs:res.result.data
+      })
+      console.log("获取到了tabs",res)
+    }).catch(res=>{
+      console.log("获取tabs出错",res)
+    })
 
     //支持页面转发
     wx.showShareMenu({
@@ -117,7 +104,9 @@ Page({
   getFood: function (longitude, latitude) {
     var _this = this;
     var index = _this.data.xmwzB_index;
-
+    if(_this.data.tabs.length == 0){
+      return
+    }
     qqmapsdk.search({
       keyword: _this.data.tabs[index].name,
       location: {
@@ -303,7 +292,6 @@ Page({
   },
   //路线规划
   planning(e) {
-    console.log(e)
     let plugin = requirePlugin('routePlan');
     let key = '6WMBZ-LQULS-5DBOS-6DRZO-XXT22-XLFBR'; //使用在腾讯位置服务申请的key
     let referer = '浮标位置'; //调用插件的app的名称

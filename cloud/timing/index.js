@@ -18,21 +18,21 @@ exports.main = async (event, context) => {
   //查询所有
   db.collection('openidList').get()
     .then(res => {
+      var wxts = "建议着厚外套加毛衣等服装。"
       for (var i = 0; i < res.data.length; i++) {
         var admin_area = res.data[i].admin_area //城市地方
         var location = res.data[i].location
         var openid = res.data[i].openid
         var _id = res.data[i]._id
-        var wxts = ""
+        
         rp(urlTian+location)
         .then(function(res){
           var xx = JSON.parse(res).HeWeather6[0].lifestyle
           for(var j=0;j<xx.length;j++){
             if(xx[j].type == 'drsg'){
               var index = xx[j].txt.indexOf("。")
-              wxts = xx[j].txt.substring(0,index)
+              wxts = xx[j].txt.substring(0,index+1)
               console.log("切割后端字符串：-------",wxts)
-              break
             }
           }
         })
@@ -46,7 +46,7 @@ exports.main = async (event, context) => {
             var cond_txt = now.cond_txt //天气
             var tmp = now.tmp//温度
             
-            
+            //封装对象
             var data = {
               admin_area:admin_area,
               cond_txt:cond_txt,
@@ -54,6 +54,7 @@ exports.main = async (event, context) => {
               wxts:wxts,
               openid:openid
             }
+            //发送消息订阅
             cloud.callFunction({
               name:'tasong',
               data:data

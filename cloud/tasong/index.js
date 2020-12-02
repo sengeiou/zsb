@@ -9,7 +9,7 @@ cloud.init({
 exports.main = async (event, context) => {
 
   var date = new Date()
-
+  console.log("温馨提示：",event.wxts)
   try {
     const result = await cloud.openapi.subscribeMessage.send({
       touser: event.openid,
@@ -34,7 +34,8 @@ exports.main = async (event, context) => {
         }
       },
       templateId: 'Q1gkgyEtSAG0HTUoZSjgDhThPEWw4dsBtZCYdjLhYtY',
-      miniprogramState: 'developer'
+      // miniprogramState: 'developer'
+      // 跳转小程序类型：developer为开发版；trial为体验版；formal为正式版；默认为正式版
     })
     return result
   } catch (err) {
