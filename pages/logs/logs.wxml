@@ -1,6 +1,7 @@
-<!--logs.wxml-->
-<view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
-</view>
+<block wx:if="{{mCanUse}}">
+    <navigator url="plugin://chelaile/index">车来了(用户没传GPS)</navigator>
+    <navigator url="{{chelaileUrl}}">车来了(用户传了GPS)</navigator>
+</block>
+<block wx:else>
+    <view>当前 sdk 版本不支持“车来了小程序”</view>
+</block>
