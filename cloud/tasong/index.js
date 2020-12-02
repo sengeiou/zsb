@@ -7,33 +7,34 @@ cloud.init({
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext()
+
+  var date = new Date()
+
   try {
-    console.log("进来了")
-    console.log(event)
     const result = await cloud.openapi.subscribeMessage.send({
-      touser: event.userInfo.openId,
+      touser: event.openid,
       page: '/pages/weather/weather',
-      // lang: 'zh_CN',
       data: {
         date1: {
-          value: '2019年10月15日'
+          //value: new Date().toFormat("YYYY-MM-DD") 
+          value:date.getFullYear()+"年"+(date.getMonth() + 1)+"月"+date.getDate()+"日"
         },
         phrase2: {
-          value: '重庆市'
+          value: event.admin_area
+          //value:'重庆市'
         },
         phrase3: {
-          value: '晴'
+          value: event.cond_txt
         },
         character_string4: {
-          value: '25~28°'
+          value: event.tmp+'°'
         },
         thing5: {
-          value: '温度较低，请注意保暖哦'
+          value: event.wxts
         }
       },
       templateId: 'Q1gkgyEtSAG0HTUoZSjgDhThPEWw4dsBtZCYdjLhYtY',
-    //  miniprogramState: 'developer'
+      miniprogramState: 'developer'
     })
     return result
   } catch (err) {

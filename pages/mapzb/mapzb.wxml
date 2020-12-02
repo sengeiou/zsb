@@ -1,3 +1,3 @@
 <button bindtap="getopenid">获取openid</button>
 <button bindtap="sq">获取用户授权</button>
-<!-- <button bindtap="fs">发送给用户</button>  -->
+<button bindtap="fs">发送给用户</button> 

@@ -54,8 +54,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/mapzb/mapzb",
-          "pathName": "pages/mapzb/mapzb",
+          "name": "pages/weather/weather",
+          "pathName": "pages/weather/weather",
           "query": "",
           "scene": null
         }

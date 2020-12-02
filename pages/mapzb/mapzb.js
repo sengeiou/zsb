@@ -22,11 +22,16 @@ Page({
       }
     })
   },
-  fs(openid){
+
+  fs(){
     wx.cloud.callFunction({
       name:"tasong",
       data:{
-        openid:openid
+        openid:'ocIL15XaIvoe00RLNjvSw5kg0-i4',
+        admin_area:"重庆市",
+        cond_txt:"晴",
+        tmp:'9',
+        wxts:"建议着厚外套加毛衣等服装。",
       }
     }).then(res =>{
       console.log("发送成功",res)

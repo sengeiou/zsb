@@ -13,6 +13,7 @@ Page({
     data: {
         greetings: '', // 问候语
         geoDes: '定位中...', // 地理位置描述
+        admin_area:'',//城市
         location: '', // 地理坐标
         bgImgUrl: config.BG_IMG_BASE_URL + '/calm.jpg', // 背景图片地址
         nowWeather: { // 实时天气数据
@@ -20,7 +21,7 @@ Page({
             condTxt: '', // 天气状况
             windDir: '', // 风向
             windSc: '', // 风力
-            windSpd: '', // 风速
+            windSpd: '', // 风速 
             pres: '', // 大气压
             hum: '', // 湿度
             pcpn: '', // 降水量
@@ -39,11 +40,11 @@ Page({
     wx_share() {
         wx.showShareMenu();
     },
-    onLoad(){
+    onLoad() {
         wx.showShareMenu({
             withShareTicket: true,
             menus: ['shareAppMessage', 'shareTimeline']
-          })
+        })
     },
     onShow() {
         this.init()
@@ -71,6 +72,7 @@ Page({
 
     // 跳到搜索页
     toSearchPage() {
+        this.addUser()
         wx.navigateTo({
             url: '/pages/searchGeo/searchGeo'
         })
@@ -78,7 +80,6 @@ Page({
 
     // 获取地理位置信息
     async getLocation() {
-
         let position = wx.getStorageSync('POSITION')
         position = position ? JSON.parse(position) : position
 
@@ -99,7 +100,6 @@ Page({
                 this.setData({
                     location: `${longitude},${latitude}`
                 })
-
                 // 逆地址解析 根据经纬度获取地址描述
                 api.reverseGeocoder({
                     longitude,
@@ -108,7 +108,8 @@ Page({
                     let addressComponet = res.address_component
                     let geoDes = `${addressComponet.city}${addressComponet.district}${addressComponet.street_number}`
                     this.setData({
-                        geoDes
+                        geoDes,
+                        admin_area:res.address_component.city
                     })
                 })
             })
@@ -116,6 +117,37 @@ Page({
                 console.error(err)
             })
     },
+
+    //添加订阅人信息
+    addUser() {
+        var _this = this;
+        //通知用户订阅授权
+        wx.requestSubscribeMessage({
+            tmplIds: ['Q1gkgyEtSAG0HTUoZSjgDhThPEWw4dsBtZCYdjLhYtY'],
+            success(res) {
+                if (res.Q1gkgyEtSAG0HTUoZSjgDhThPEWw4dsBtZCYdjLhYtY == "accept") {
+                    //存入云数据库中
+                    wx.cloud.callFunction({
+                        name: "subscribe",
+                        data: {
+                            location: _this.data.location,
+                            admin_area: _this.data.admin_area
+                        }
+                    }).then(res => {
+                        console.log("获取openid成功,并添加成功", res)
+                    }).catch(res => {
+                        console.log("获取openid失败,并添加失败", res)
+                    })
+                }
+            },
+            fail(res) {
+                console.log("用户订阅授权发生了错误",res)
+            }
+        })
+
+    },
+
+
 
     // 初始化天气信息
     async initWeatherInfo() {
@@ -146,12 +178,11 @@ Page({
                 })
                 .then((res) => {
                     let data = res.HeWeather6[0]
-                    console.log(data)
                     this.setData({
                         nowWeather: {
                             parentCity: data.basic.parent_city,
                             location: data.basic.location,
-                            tmp: data.now.tmp,
+                            tmp: data.now.tmp, //天气温度
                             condTxt: data.now.cond_txt,
                             windDir: data.now.wind_dir,
                             windSc: data.now.wind_sc,
@@ -197,43 +228,42 @@ Page({
     // 获取逐三小时天气
     getHourlyWeather() {
         return new Promise((resolve, reject) => {
-            console.log(this.data.location)
+            // console.log(this.data.location)
             api.getHourlyWeather({
-                location: this.data.location
-            })
-            .then((res) => {
-                let data = res.HeWeather6[0].hourly
-                console.log(res)
-                let formatData = data.reduce((pre, cur) => {
-                    pre.push({
-                        date: cur.time.split(' ')[1],
-                        condIconUrl: `${config.COND_ICON_BASE_URL}/${cur.cond_code}.png`, // 天气图标
-                        condTxt: cur.cond_txt, // 天气状况描述
-                        tmp: cur.tmp, // 气温
-                        windDir: cur.wind_dir, // 风向
-                        windSc: cur.wind_sc, // 风力
-                        windSpd: cur.wind_spd, // 风速
-                        pres: cur.pres // 大气压
-                    })
-                    return pre
-                }, [])
-
-                let gap = 4
-                let trip = Math.ceil(formatData.length / gap)
-                let hourlyWeather = []
-                for (let i = 0; i < trip; i++) {
-                    hourlyWeather.push(formatData.slice(i * gap, (i + 1) * gap))
-                }
-
-                this.setData({
-                    hourlyWeather
+                    location: this.data.location
                 })
-                resolve()
-            })
-            .catch((err) => {
-                console.error(err)
-                reject(err)
-            })
+                .then((res) => {
+                    let data = res.HeWeather6[0].hourly
+                    let formatData = data.reduce((pre, cur) => {
+                        pre.push({
+                            date: cur.time.split(' ')[1],
+                            condIconUrl: `${config.COND_ICON_BASE_URL}/${cur.cond_code}.png`, // 天气图标
+                            condTxt: cur.cond_txt, // 天气状况描述
+                            tmp: cur.tmp, // 气温
+                            windDir: cur.wind_dir, // 风向
+                            windSc: cur.wind_sc, // 风力
+                            windSpd: cur.wind_spd, // 风速
+                            pres: cur.pres // 大气压
+                        })
+                        return pre
+                    }, [])
+
+                    let gap = 4
+                    let trip = Math.ceil(formatData.length / gap)
+                    let hourlyWeather = []
+                    for (let i = 0; i < trip; i++) {
+                        hourlyWeather.push(formatData.slice(i * gap, (i + 1) * gap))
+                    }
+
+                    this.setData({
+                        hourlyWeather
+                    })
+                    resolve()
+                })
+                .catch((err) => {
+                    console.error(err)
+                    reject(err)
+                })
         })
     },
 
@@ -286,6 +316,7 @@ Page({
                 })
                 .then((res) => {
                     let data = res.HeWeather6[0].lifestyle
+                    console.log("生活指数", data)
                     const lifestyleImgList = config.lifestyleImgList
                     let lifestyle = data.reduce((pre, cur) => {
                         pre.push({
