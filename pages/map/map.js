@@ -2,13 +2,10 @@
 import QQMapWX from '../../utils/qqmap-wx-jssdk.js';
 var qqmapsdk;
 const chooseLocation = requirePlugin('chooseLocation');
-const app = getApp()
-const util = app.globalData.util
 Page({
   data: {
     // latitude: 29.570043563842773,
     // longitude: 106.5005874633789,
-    greetings: '', // 问候语
     mapw: '100%',
     maph: '0',
     scale: '16',
@@ -21,10 +18,6 @@ Page({
   mapCtx: null,
   onLoad: function () {
     var _this = this
-
-    this.setData({
-      greetings: util.getGreetings()
-   })
 
     //调用函数来渲染tabs
     wx.cloud.callFunction({
