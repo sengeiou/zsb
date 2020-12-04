@@ -11,10 +11,10 @@ const regeneratorRuntime = require('../../lib/runtime')
 
 Page({
     data: {
-        subscribe:true,//是否订阅
+        subscribe: true, //是否订阅
         greetings: '', // 问候语
         geoDes: '定位中...', // 地理位置描述
-        admin_area:'',//城市
+        admin_area: '', //城市
         location: '', // 地理坐标
         bgImgUrl: config.BG_IMG_BASE_URL + '/calm.jpg', // 背景图片地址
         nowWeather: { // 实时天气数据
@@ -73,10 +73,7 @@ Page({
 
     // 跳到搜索页
     toSearchPage() {
-        //判断是否订阅
-        if(this.data.subscribe){
-            this.addUser()
-        }
+
         wx.navigateTo({
             url: '/pages/searchGeo/searchGeo'
         })
@@ -113,7 +110,7 @@ Page({
                     let geoDes = `${addressComponet.city}${addressComponet.district}${addressComponet.street_number}`
                     this.setData({
                         geoDes,
-                        admin_area:res.address_component.city
+                        admin_area: res.address_component.city
                     })
                 })
             })
@@ -121,10 +118,20 @@ Page({
                 console.error(err)
             })
     },
-
     //添加订阅人信息
     addUser() {
         var _this = this;
+
+        //判断是否订阅
+        if (!this.data.subscribe) {
+            wx.showToast({
+                title: '每天只能订阅一次',
+                icon: 'none',
+                duration: 1500
+            })
+            return
+        }
+
         //通知用户订阅授权
         wx.requestSubscribeMessage({
             tmplIds: ['Q1gkgyEtSAG0HTUoZSjgDhThPEWw4dsBtZCYdjLhYtY'],
@@ -141,12 +148,12 @@ Page({
                         //提示
                         wx.showToast({
                             title: '订阅成功！', // 标题
-                            icon: 'success',  // 图标类型，默认success
-                            duration: 1500  // 提示窗停留时间，默认1500ms
-                          })
+                            icon: 'success', // 图标类型，默认success
+                            duration: 1500 // 提示窗停留时间，默认1500ms
+                        })
                         console.log("获取openid成功,并添加成功", res)
                         _this.setData({
-                            subscribe:false
+                            subscribe: false
                         })
                     }).catch(res => {
                         console.log("获取openid失败,并添加失败", res)
@@ -154,7 +161,7 @@ Page({
                 }
             },
             fail(res) {
-                console.log("用户订阅授权发生了错误",res)
+                console.log("用户订阅授权发生了错误", res)
             }
         })
 

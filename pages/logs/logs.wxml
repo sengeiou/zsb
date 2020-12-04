@@ -1,7 +1,13 @@
-<block wx:if="{{mCanUse}}">
-    <navigator url="plugin://chelaile/index">车来了(用户没传GPS)</navigator>
-    <navigator url="{{chelaileUrl}}">车来了(用户传了GPS)</navigator>
-</block>
-<block wx:else>
-    <view>当前 sdk 版本不支持“车来了小程序”</view>
-</block>
+<view class="bg" style="background-image:url({{bgImgUrl}})"></view>
+
+
+<view class="container">
+  <!-- 用户信息 -->
+  <view class="userinfo">
+    <open-data type="userAvatarUrl" class="userinfo-avatar" />
+    <text class="userinfo-nickname">{{greetings}}，</text>
+    <open-data type="userNickName" />
+  </view>
+  <brickLayout dataSet="{{dataSet}}" option="{{brick_option}}" bind:tapCard="tapCard" bind:tapLike="handleLike"
+    bind:tapUser="handleUserEvent" bind:onCardExpanded="handleExpand" />
+</view>

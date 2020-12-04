@@ -16,6 +16,16 @@ enable-overlooking="true"
 bindtap="bindtap"
 >
 
+<view class="container">
+  <!-- 用户信息 -->
+  <view class="userinfo">
+    <open-data type="userAvatarUrl" class="userinfo-avatar" />
+    <!-- <text class="userinfo-nickname">{{greetings}}，</text>
+    <open-data type="userNickName" /> -->
+  </view>
+</view>
+
+
 <cover-view class="tptp">
   <cover-image bindtap="controltap" src="../../images/dh1.png"></cover-image>
 </cover-view>

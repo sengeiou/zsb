@@ -33,6 +33,12 @@
         "text": "天气",
         "iconPath": "images/tq.png",
         "selectedIconPath": "images/tq1.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "小程序",
+        "iconPath": "images/xcx1.png",
+        "selectedIconPath": "images/xcx2.png"
       }
     ]
   },
@@ -52,11 +58,12 @@
       "chelaile": {
         "version": "1.0.5",
         "provider": "wx71d589ea01ce3321"
+      },
+      "brickLayout": {
+        "version": "0.2.0",
+        "provider": "wx3c042630f3cdc175"
       }
   },
-  "navigateToMiniProgramAppIdList": [
-    "wx71d589ea01ce3321"
-],
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序定位"

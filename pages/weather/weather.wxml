@@ -4,10 +4,10 @@
 
 <view class="container">
     <!-- 用户信息 -->
-    <view class="userinfo">
+    <view class="userinfo" catchtap="addUser">
         <open-data type="userAvatarUrl" class="userinfo-avatar" />
         <text class="userinfo-nickname">{{greetings}}，</text>
-        <open-data type="userNickName" />
+        <open-data type="userNickName" />，订阅天气提醒
     </view>
     <!-- 实时天气信息 -->
     <view class="now" catchtap="toSearchPage">
