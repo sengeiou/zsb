@@ -13,13 +13,20 @@ Page({
             greetings: util.getGreetings()
         })
 
+
+        //支持页面转发
+        wx.showShareMenu({
+            withShareTicket: true,
+            menus: ['shareAppMessage', 'shareTimeline']
+        })
+
         //初始化数据
         _this.init()
-        
+
 
     },
     //初始化数据
-    init(){
+    init() {
         //发送请求获取数据
         wx.cloud.callFunction({
             name: "xcxList",
@@ -54,23 +61,23 @@ Page({
                 liked.leix = "liked"
                 _this.updated(liked)
 
-                if(!liked.liked){
+                if (!liked.liked) {
                     wx.showToast({
                         title: '点赞成功',
                         icon: 'success',
-                        duration: 1500//持续的时间
-                      })
-                }else{
+                        duration: 1500 //持续的时间
+                    })
+                } else {
                     wx.showToast({
                         title: '您已取消点赞',
                         icon: 'none',
-                        duration: 1500//持续的时间
-                      })
+                        duration: 1500 //持续的时间
+                    })
                 }
                 setTimeout(function () {
                     //要延时执行的代码
                     _this.init()
-                   }, 300) //延迟时间 这里是1秒
+                }, 300) //延迟时间 这里是1秒
             }
         }
 
@@ -79,7 +86,7 @@ Page({
         var _this = this
         var cardId = event.detail.card_id
         //判断是什么Id
-        if(cardId == null || cardId === ''){
+        if (cardId == null || cardId === '') {
             cardId = event.detail.user_id
         }
         var list = _this.data.dataSet;

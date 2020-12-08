@@ -2,7 +2,8 @@ const util = require('./utils/util')
 const api = require('./api')
 const loading = require('./utils/loading')
 const config = require('./utils/config')
-
+// app.js
+const ald = require('./utils/ald-stat.js')
 App({
   onLaunch: function () {
      //云开发初始化
