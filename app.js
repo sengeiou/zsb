@@ -4,6 +4,8 @@ const loading = require('./utils/loading')
 const config = require('./utils/config')
 // app.js
 const ald = require('./utils/ald-stat.js')
+const u8ad = require('./utils/u8ad_sdk.min.js');
+
 App({
   onLaunch: function () {
      //云开发初始化

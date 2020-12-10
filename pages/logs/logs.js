@@ -6,6 +6,20 @@ Page({
         bgImgUrl: config.BG_IMG_BASE_URL + '/calm.jpg', // 背景图片地址
         greetings: '', // 问候语
         dataSet: [] //数据集合
+        // 需在 data 中配置广告位 
+        ,
+		u8ad: 
+		{ 
+			adData: {}, 
+			ad: {
+				banner: "banner", // banner 广告开关 
+				insert: "insert", // 插屏广告开关 
+				fixed: "fixed" // 悬浮广告开关 
+				//如不需要展示删除即可 
+			} 
+		},
+		// 自定义广告 
+		adlist:[]
     },
     onShow() {
         var _this = this
@@ -133,5 +147,23 @@ Page({
         const expandStatus = event.detail.expand_status
         // code here
         console.log("expand call back")
+    },
+    onLoad: function() {
+        var _this = this
+        let app = getApp();// 运行配置统计（重要：放在小程序入口页面，首页及广告展示页面）
+        //自定义广告拉取(不使用自定义广告可删除)
+        app.u8ad.getu8Ads({'adtype':5},function(res){
+          for(var e=0;e < res.data.length;e++){
+            res.data[e].encdata={"encdata":res.data[e].encdata};
+          }
+          _this.setData({adlist:res.data});
+        })
+    },
+    //自定义广告回调(不使用自定义广告可删除)
+    u8adreward:function(e){
+        app.u8ad.u8AdsClk(e.currentTarget.dataset.id);
+        //可在此处自行给予用户奖励（激励广告）
+        console.log(e)
     }
+
 })
