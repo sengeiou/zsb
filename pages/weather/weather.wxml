@@ -115,3 +115,9 @@
 </view>
 <!-- <button class="share-btn" open-type="share" bindtap="wx_share">立即分享</button> -->
 
+
+<!-- 悬浮广告，按需引入 --> 
+<view class="u8_fixed"> 
+	<u8-ad data-id="{{u8ad.ad.fixed}}" adData="{{u8ad.adData}}" bindadload="u8adLoad" bindclick="u8adClick" 
+bindclose="u8adClose" class="u8_component"></u8-ad> 
+</view> 

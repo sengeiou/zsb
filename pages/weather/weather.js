@@ -33,6 +33,19 @@ Page({
         days: ['今天', '明天', '后天'],
         dailyWeather: [], // 逐日天气数据
         lifestyle: [] // 生活指数
+
+        // 需在 data 中配置广告位 
+        ,
+		u8ad: 
+		{ 
+			adData: {}, 
+			ad: {
+				banner: "banner", // banner 广告开关 
+				insert: "insert", // 插屏广告开关 
+				fixed: "fixed" // 悬浮广告开关 
+				//如不需要展示删除即可 
+			} 
+		}
     },
 
     // 加载提示
@@ -42,9 +55,20 @@ Page({
         wx.showShareMenu();
     },
     onLoad() {
+        //转发
         wx.showShareMenu({
             withShareTicket: true,
             menus: ['shareAppMessage', 'shareTimeline']
+        })
+        //广告的加载
+        var _this = this
+        let app = getApp();// 运行配置统计（重要：放在小程序入口页面，首页及广告展示页面）
+        //自定义广告拉取(不使用自定义广告可删除)
+        app.u8ad.getu8Ads({'adtype':5},function(res){
+          for(var e=0;e < res.data.length;e++){
+            res.data[e].encdata={"encdata":res.data[e].encdata};
+          }
+          _this.setData({adlist:res.data});
         })
     },
     onShow() {

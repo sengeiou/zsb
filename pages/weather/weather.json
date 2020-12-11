@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "u8-ad": "/components/u8AD/u8AD"
+  },
   "navigationStyle": "custom"
 }

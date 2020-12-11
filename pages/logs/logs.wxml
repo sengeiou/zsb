@@ -28,8 +28,3 @@ bindclose="u8adClose" class="u8_component"></u8-ad>
 	<u8-ad data-id="{{u8ad.ad.fixed}}" adData="{{u8ad.adData}}" bindadload="u8adLoad" bindclick="u8adClick" 
 bindclose="u8adClose" class="u8_component"></u8-ad> 
 </view> 
-
-<!-- 自定义广告 -->
-<block wx:for="{{adlist}}" wx:key="ckey">
-<navigator target="miniProgram" path="{{item.load_page}}" extraData='{{item.encdata}}' bindsuccess="u8adreward" data-id="{{item.ckey}}" app-id="{{item.appId}}">自定义广告</navigator>  
-</block>

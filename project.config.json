@@ -54,8 +54,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/logs/logs",
-          "pathName": "pages/logs/logs",
+          "name": "pages/weather/weather",
+          "pathName": "pages/weather/weather",
           "query": "",
           "scene": null
         }
