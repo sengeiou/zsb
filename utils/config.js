@@ -34,8 +34,8 @@ module.exports = {
     COND_ICON_BASE_URL: 'https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/cond-icon',
 
     // 背景图片基地址
-     //BG_IMG_BASE_URL: 'https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/bg', //普通背景
-    BG_IMG_BASE_URL: 'https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/stylebg',//卡通背景
+     BG_IMG_BASE_URL: 'https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/bg', //普通背景
+    //BG_IMG_BASE_URL: 'https://6461-data-1f0e99-1258386784.tcb.qcloud.la/weather/images/stylebg',//卡通背景
 
     // 背景图片列表
     bgImgList: [

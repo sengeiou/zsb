@@ -109,8 +109,8 @@
 
     <!-- copyright -->
     <view class="copyright">
-        <text>Developed by：hs</text>
-        <text>, Debugging by：zan</text>
+        <text>Developed by：HuangShuai</text>
+        <text>, Debugging by：ZhengAnNa</text>
     </view>
 </view>
 <!-- <button class="share-btn" open-type="share" bindtap="wx_share">立即分享</button> -->

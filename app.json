@@ -33,12 +33,6 @@
         "text": "天气",
         "iconPath": "images/tq.png",
         "selectedIconPath": "images/tq1.png"
-      },
-      {
-        "pagePath": "pages/logs/logs",
-        "text": "小程序",
-        "iconPath": "images/xcx1.png",
-        "selectedIconPath": "images/xcx2.png"
       }
     ]
   },
